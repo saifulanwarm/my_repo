@@ -14,14 +14,154 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+body{
+  background-image: url(/images/bgt.jpg);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Poppy;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes flickerEffect {
+  0% {
+      box-shadow: 5px 5px 15px 5px rgba(9, 87, 241, 0.5),
+                  -5px -5px 15px 5px rgba(9, 87, 241, 0.5);
+  }
+  50% {
+      box-shadow: 5px 5px 25px 10px rgba(9, 87, 241, 0.8),
+                  -5px -5px 25px 10px rgba(9, 87, 241, 0.8);
+  }
+  100% {
+      box-shadow: 5px 5px 15px 5px rgba(9, 87, 241, 0.5),
+                  -5px -5px 15px 5px rgba(9, 87, 241, 0.5);
+  }
+}
+
+.card {
+  height: 500px;
+  width: 750px;
+  background-color: #091057;
+  border-radius: 40px;
+  margin: auto;
+  position: relative;
+  padding-bottom: 30px;
+  animation: flickerEffect 2s infinite;
+}
+
+.card .me {
+  position: absolute; 
+  background-color: rgb(50, 160, 244);
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 20px;
+  top: -35px; 
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.doc img{
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  margin: 20px 80px 5px 20px;
+  float: left;
+}
+
+.doc h1 {
+  margin: 0;
+  padding-top: 40px;
+  color: #ffffff;
+  font-size: 25px;
+}
+
+.doc h2 {
+  padding-top: 20px;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.clear {
+  clear: left;
+}
+
+.accordion {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px 0;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px); /* Agar terlihat keluar dari card */
+  position: relative;
+  z-index: 10; 
+  color: #ffffff;
+  text-align: center;
+}
+
+.accordion-header {
+  padding: 15px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgb(50, 160, 244);
+  border-radius: 5px 5px 0 0;
+  transition: background-color 0.3s;
+}
+
+.accordion-header:hover {
+  background-color:#e0f7fa ;
+  color: black;
+}
+
+.accordion-content {
+  padding: 15px;
+  display: none; 
+  border-top: 1px solid #ccc;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); 
+  color: black;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footer a {
+  margin: 0 15px; /* Jarak antar ikon */
+}
+
+.social-icon {
+  width: 40px; /* Ukuran ikon */
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2); /* Efek membesar saat dihover */
 }

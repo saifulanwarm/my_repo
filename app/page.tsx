@@ -4,7 +4,6 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebaseConfig";
 import Image from "next/image";
 
-
 interface UserData {
   nama: string;
   nim: string;
@@ -14,6 +13,7 @@ export default function Home() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false); // State untuk mengontrol accordion
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,16 +40,18 @@ export default function Home() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen); // Mengubah status terbuka/tutup
+  };
+
   return (
     <div className="wrapper">
       <div className="card">
         <h1 className="me">About me</h1>
         <div className="doc">
-        <Image src="/images/photo.jpg" alt="photo" width={200} height={200} />
+          <Image src="/images/photo.jpg" alt="photo" width={200} height={200} />
           {userData ? (
-            <>
-              <h1>Hello everyone I'm {userData.nama}, NPM {userData.nim}.</h1>
-            </>
+            <h1>Hello everyone I'm {userData.nama}, NPM {userData.nim}.</h1>
           ) : (
             <h1>No user data available</h1>
           )}
@@ -59,10 +61,10 @@ export default function Home() {
           </h2>
         </div>
         <div className="accordion">
-          <h2 className="accordion-header" onClick={() => toggleAccordion()}>
-            What technologies were used to build this website? <span>▼</span>
+          <h2 className="accordion-header" onClick={toggleAccordion}>
+            What technologies were used to build this website? <span>{isOpen ? '▲' : '▼'}</span>
           </h2>
-          <div className="accordion-content">
+          <div className={`accordion-content ${isOpen ? 'open' : ''}`}>
             <p>
               This website was built using React.js & Typescript technology as the main
               framework for user interface development. React.js was chosen
@@ -77,19 +79,14 @@ export default function Home() {
           </div>
         </div>
         <div className="footer">
-          <a href="https://www.instagram.com/ma_sa1ful" target="_blank">
-          <Image src="/images/instagram.png" alt="photo" width={50} height={50} />
+          <a href="https://www.instagram.com/ma_sa1ful" target="_blank" rel="noopener noreferrer">
+            <Image src="/images/instagram.png" alt="Instagram" width={50} height={50} />
           </a>
-          <a href="https://github.com/saifulanwarm" target="_blank">
-          <Image src="/images/github.png" alt="photo" width={50} height={50} />
+          <a href="https://github.com/saifulanwarm" target="_blank" rel="noopener noreferrer">
+            <Image src="/images/github.png" alt="GitHub" width={50} height={50} />
           </a>
         </div>
       </div>
     </div>
   );
-}
-
-function toggleAccordion() {
-  const accordionContent = document.querySelector(".accordion-content");
-  accordionContent?.classList.toggle("hidden");
 }

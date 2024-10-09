@@ -141,6 +141,10 @@ body{
   color: black;
 }
 
+.accordion .open {
+  display: block; 
+}
+
 .footer {
   display: flex;
   justify-content: center;
